@@ -10,4 +10,4 @@ Prerequisites
                   public static void filterTripleA(List<String> strings) {
  4)  HelloFour - 
 
-* [Java Development Kit (JDK) 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+* [Java Development Kit (JDK) 9](http://www.oracle.com/technetwork/java/javase/downloads/jdk9-downloads-3848520.html)
