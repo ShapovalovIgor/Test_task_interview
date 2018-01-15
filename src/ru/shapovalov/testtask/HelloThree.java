@@ -13,22 +13,36 @@ public class HelloThree {
         List<String> listString = List.of("aaa", "aaaaaaaaaaaaft", "bbbbbb", "baaaa", "aa");
         filterTripleA(listString);
     }
+//Первый вариант (не рекрмендуемое решение)
+//    public static void filterTripleA(List<String> strings) {
+//        List<String> tempList = new ArrayList();
+//        for (String string : strings) {
+//            char[] arrayChar = string.toCharArray();
+//            if (2 < arrayChar.length) {
+//                Character characterA = new Character('a');
+//                if (characterA.equals(arrayChar[0])
+//                        && characterA.equals(arrayChar[1])
+//                        && characterA.equals(arrayChar[2])) {
+//                    System.out.println("Remove element: " + string);
+//                } else {
+//                    tempList.add(string);
+//                }
+//            } else {
+//                tempList.add(string);
+//            }
+//        }
+//        strings = tempList;
+//        System.out.println("New size:" + strings);
+//    }
 
+    //второй вариант (правильный вариант)
     public static void filterTripleA(List<String> strings) {
         List<String> tempList = new ArrayList();
+        String searchString = "aaa";
         for (String string : strings) {
-            char[] arrayChar = string.toCharArray();
-            if (2 < arrayChar.length) {
-                Character characterA = new Character('a');
-                if (characterA.equals(arrayChar[0])
-                        && characterA.equals(arrayChar[1])
-                        && characterA.equals(arrayChar[2])) {
-                    System.out.println("Remove element: " + string);
-                } else {
-                    tempList.add(string);
-                }
-            } else {
+            if (string.indexOf(searchString) == 0) {
                 tempList.add(string);
+                System.out.println("Add element: " + string);
             }
         }
         strings = tempList;
