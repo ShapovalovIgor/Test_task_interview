@@ -9,6 +9,6 @@ Prerequisites
                   Сигнатура необходимого метода должна иметь вид:
                   public static void filterTripleA(List<String> strings) {
                   (в примере два варианта решения один правильный, а второй не очень =) )
- 4)  HelloFour - 
+ 4)  HelloFour - Написать метод возвращабщий факториал
 
 * [Java Development Kit (JDK) 9](http://www.oracle.com/technetwork/java/javase/downloads/jdk9-downloads-3848520.html)
