@@ -17,7 +17,7 @@ Prerequisites
 **TOP popular interview question:**
 
 **Java SE**
-1. На какие группы можно поделить типы данных - римитивы и ссылочные
+1. На какие группы можно поделить типы данных - примитивы и ссылочные
 2. Примитивы это - short, byte, char, boolean, int, long, float, double
 3. сылочные это - String, Integer, Boolean, Long, BigInteger, BigDecimal;
 4. Какие значения по умолчанию инициализируют переменные - int = 0, boolean = false, String = null, double = 0.0 
