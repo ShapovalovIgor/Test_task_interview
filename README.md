@@ -362,3 +362,331 @@ http://javastudy.ru/interview/list-of-question-java-interview/
 https://www.youtube.com/watch?v=P6aNLWuLK18 
 https://jsehelper.blogspot.ru/
 http://javastudy.ru/interview/jee-hibernate-questions-answers/
+
+**Тест**
+1. Что будет напечатано на консоли при попытке откомпилировать и выполнить следующий код:
+
+
+                          float f = 36 / 8;
+                          System.out.println( f );
+
+
+a) 4
+b) 4.0
+c) 4.5
+d) Ошибка времени компиляции
+e) Ошибка выполнения
+
+
+2. Что произойдет при попытке откомпилировать и выполнить следующий код:
+
+			System.out.println( Integer.POSITIVE_INFINITY == Integer.POSITIVE_INFINITY );
+
+a) Ошибка времени компиляции
+b) будет напечатано true
+c) будет напечатано false
+
+
+3. Что будет напечатано в результате выполнения следующего кода?
+
+
+	public class MyException extends Exception { }
+
+	public class Person {
+     		public void go() throws Exception { throw new Exception(); }
+	}
+
+	public class Me extends Person {
+     		public void go() throws Exception{ throw new MyException(); }
+		public static void main(String[] args)
+		{
+     			try {Person person = new Me(); person.go();}
+     			catch (Exception e) {System.out.println("Exception");}
+     			catch (MyException e) {System.out.println("MyException");}
+		}
+	}
+
+a) MyException
+b) Exception
+c) Ошибка времени компиляции
+d) Ошибка времени выполнения
+
+
+4. Что будет напечатано при попытке откомпилировать и выполнить следующий код:
+
+	int i = 10;
+	boolean b = false;
+	if ( b = true )
+	{
+		i += 2;
+	}
+	System.out.println( i );
+a) 10
+b) 12
+c) ошибка времени компиляции
+d) программа выполнится нормально, но ничего напечатано не будет
+
+
+5. Какие цифры и в каком порядке будут выведены на экран программой:
+
+	public class MyClass
+	{
+		public static void main( String[] args )
+		{
+			int k = 0;
+			try
+			{
+				int i = 5 / k;
+			}
+			catch( ArithmeticException e )
+			{
+				System.out.println( "1" );  // 1
+			}
+			catch( RuntimeException re )
+			{
+				System.out.println( "2" );
+				return;
+			}
+			catch( Exception ee )
+			{
+				System.out.println( "3" );
+			}
+			finally
+			{
+				System.out.println( "4" );
+			}
+			System.out.println( "5" );
+		}
+	}
+a) будет выведено только 5
+b) будет выведено 1 и 4, в таком порядке
+c) будет выведено 1, 2 и 4, в таком порядке
+d) будет выведено 1, 4 и 5, в таком порядке
+e) будет выведено 1, 2, 4 и 5, в таком порядке
+f) будет выведено 3 и 5, в таком порядке
+g) будет выведено 1
+
+
+5a. Как изменится вывод примера 4, если после строки // 1 добавить строку кода:
+	System.exit(0);
+
+5б. Как изменится вывод примера 4, если после строки // 1 добавить строку кода:
+	return;
+
+
+6. Что будет выведено на экран программой:
+	public class MyClass
+	{
+		public static void main( String[] args )
+		{
+			StringBuffer sb = new StringBuffer( -12 );
+			System.out.println( sb.toString() );
+		}
+	}
+
+a) -12
+b) сообщение об ошибке времени выполнения
+с) сообщение об ошибке времени компиляции
+
+
+7. Что будет выведено на экран программой:
+	public class MyClass
+	{
+		private void processArray( int[] arr )
+		for ( int i = 0; i < arr.length; i++ )
+		{
+			arr[i]++;
+		}
+
+		private void processString( String s )
+		{
+			s = "Was changed";
+		}
+
+		public static void main( String[] args )
+		{
+			int[] iArr = {0,1};
+			String str = "test";
+			processArray( iArr );
+			processString( str );
+			System.out.println( iArr[0] + ", " + iArr[1] + ", " + str );
+		}
+	}
+
+a) 0, 1, test
+b) 0, 1, Was changed
+c) 1, 2, test
+d) 1, 2, Was changed
+
+
+8. Можно ли из программы запустить процесс сборки мусора ?
+a) да
+b) нет
+c) в зависимости от операционной системы
+d) в зависимости от версии JVM
+
+
+9. Какое из следующих событий может быть причиной смерти потока ?
+a) вызов метода sleep()
+b) вызов метода wait()
+c) окончание выполнения метода start()
+d) окончание выполнения метода run()
+e) окончание выполнения конструктора класса Thread
+
+
+10. В каком классе определены методы wait() и notify()
+a) Thread
+b) Object
+c) String
+d) Math
+
+
+11. Что будет выведено на экран при попытке откомпилировать и запустить программу
+	public class MyClass
+	{
+		public static void main( String[] args )
+		{
+			int i = 10;
+			Runnable r = new Runnable()
+			{
+				public void run()
+				{
+					for ( int j = 0; j < i; j++ )
+					{
+						System.out.println( j );
+					}
+				}
+			};
+			( new Thread( r ) ).start();
+		}
+	}
+
+a) будут напечатаны числа от 0 до 9
+b) будет выведено сообщение об ошибке времени компиляции
+с) программа завершится нормально и ничего не напечатает
+d) будет выведено сообщение об ошибке времени выполнения
+
+
+12. Какие предложения можно вставить в "строку 1" приведенного ниже класса, чтобы не возникла ошибка времени компиляции
+	public class MyClass
+	{
+		int a;
+		int b = 0;
+		static int c;
+
+		void f()
+		{
+			int d;
+			int e = 0;
+			// строка 1
+		}
+	}
+a) a++
+b) b++
+c) c++
+d) d++
+e) e++
+
+13. Какой из классов-оболочек не имеет конструктора с параметром типа String ?
+a) Integer
+b) Boolean
+c) Double
+d) Float
+e) Character
+f) Byte
+g) Short
+
+14. Какая из перечисленных ниже коллекций является потокобезопасной:
+a) Vector
+b) ArrayList
+c) LinkedList
+d) HashSet
+e) TreeSet
+
+15. Какой из классов, реализующих интерфейс Set, следует использовать, если нужно получить элементы в том же порядке, в каком они были добавлены ?
+a) HashSet
+b) TreeSet
+c) LinkedHashSet
+
+
+16. Какой из классов, реализующих интерфейс List, использовать предпочтительнее, если часто используются операции вставки/удаления в середину списка ?
+a) ArrayList
+b) LinkedList
+c) Vector
+
+
+17. Что будет выведено на экран, если откомпилировать и запустить программу:
+
+	class ClassA
+	{
+		public void showMe1()
+		{
+			System.out.println( "ClassA 1" );
+		}
+
+		public static void showMe2()
+		{
+			System.out.println( "ClassA 2" );
+		}
+
+		public static void main( String[] args )
+		{
+			ClassA a = new ClassB();
+			a.showMe1();
+			a.showMe2();
+		}
+	}
+
+	class ClassB extends ClassA
+	{
+		public void showMe1()
+		{
+			System.out.println( "ClassB 1" );
+		}
+
+		public static void showMe2()
+		{
+			System.out.println( "ClassB 2" );
+		}
+	}
+
+a) ClassA 1, с новой строки ClassA 2
+b) ClassB 1, с новой строки ClassB 2
+c) ClassA 1, с новой строки ClassB 2
+d) ClassB 1, с новой строки ClassA 2
+
+
+
+18. Что неправильно в приведенном ниже коде ?
+
+	Connection c = ...
+	PreparedStatement p = c.prepareStatement("SELECT ...");
+	ResultSet r = p.execute();
+	if (r.next()) {
+		...
+	}
+
+a) Необходимо заменить if на while
+b) Необходимо заменить execute на executeQuery
+c) Необходимо заменить execute на executeUpdate
+d) Необходимо заменить next() на isFirst()
+e) Нет правильного ответа.
+
+
+19. Какой тип данных Java следует использовать при извлечении строк из базы данных, если известно, что одно из полей представляет собой значение
+денежной суммы ?
+
+a) float
+b) double
+c) Float
+d) Double
+e) BigInteger
+f) long
+g) BigDecimal
+
+
+20. Как нумеруются столбцы в ResultSet при вызове метода getXXX(номер_столбца)?
+
+a) c 1
+b) c 0
+c) задание числового номера недопустимо и вызовет ошибку времени компиляции
