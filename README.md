@@ -365,10 +365,8 @@ http://javastudy.ru/interview/jee-hibernate-questions-answers/
 
 **Тест**
 1. Что будет напечатано на консоли при попытке откомпилировать и выполнить следующий код:
-
-
-                          `float f = 36 / 8;
-                          System.out.println( f );`
+    `float f = 36 / 8;
+    System.out.println( f );`
 
 a) 4
 
@@ -381,8 +379,7 @@ d) Ошибка времени компиляции
 e) Ошибка выполнения
 
 2. Что произойдет при попытке откомпилировать и выполнить следующий код:
-
-			`System.out.println( Integer.POSITIVE_INFINITY == Integer.POSITIVE_INFINITY );`
+    `System.out.println( Integer.POSITIVE_INFINITY == Integer.POSITIVE_INFINITY );`
 
 a) Ошибка времени компиляции
 
@@ -419,13 +416,13 @@ d) Ошибка времени выполнения
 
 4. Что будет напечатано при попытке откомпилировать и выполнить следующий код:
 
-	`int i = 10;
+	```int i = 10;
 	boolean b = false;
 	if ( b = true )
 	{
 		i += 2;
 	}
-	System.out.println( i );`
+	System.out.println( i );```
 
 a) 10
 
@@ -437,7 +434,7 @@ d) программа выполнится нормально, но ничего
 
 5. Какие цифры и в каком порядке будут выведены на экран программой:
 
-	`public class MyClass
+	```public class MyClass
 	{
 		public static void main( String[] args )
 		{
@@ -465,7 +462,7 @@ d) программа выполнится нормально, но ничего
 			}
 			System.out.println( "5" );
 		}
-	}`
+	}```
 
 a) будет выведено только 5
 
@@ -490,14 +487,14 @@ g) будет выведено 1
 
 6. Что будет выведено на экран программой:
 
-	`public class MyClass
+	```public class MyClass
 	{
 		public static void main( String[] args )
 		{
 			StringBuffer sb = new StringBuffer( -12 );
 			System.out.println( sb.toString() );
 		}
-	}`
+	}```
 
 a) -12
 
@@ -508,7 +505,7 @@ b) сообщение об ошибке времени выполнения
 
 7. Что будет выведено на экран программой:
 
-	`public class MyClass
+	```public class MyClass
 	{
 		private void processArray( int[] arr )
 		for ( int i = 0; i < arr.length; i++ )
@@ -529,7 +526,7 @@ b) сообщение об ошибке времени выполнения
 			processString( str );
 			System.out.println( iArr[0] + ", " + iArr[1] + ", " + str );
 		}
-	}`
+	}```
 
 a) 0, 1, test
 
@@ -574,7 +571,7 @@ d) Math
 
 11. Что будет выведено на экран при попытке откомпилировать и запустить программу
 
-	`public class MyClass
+	```public class MyClass
 	{
 		public static void main( String[] args )
 		{
@@ -591,7 +588,7 @@ d) Math
 			};
 			( new Thread( r ) ).start();
 		}
-	}`
+	}```
 
 a) будут напечатаны числа от 0 до 9
 
@@ -603,7 +600,7 @@ d) будет выведено сообщение об ошибке времен
 
 12. Какие предложения можно вставить в "строку 1" приведенного ниже класса, чтобы не возникла ошибка времени компиляции
 
-	`public class MyClass
+	```public class MyClass
 	{
 		int a;
 		int b = 0;
@@ -615,7 +612,7 @@ d) будет выведено сообщение об ошибке времен
 			int e = 0;
 			// строка 1
 		}
-	}`
+	}```
 
 a) a++
 
@@ -673,7 +670,7 @@ c) Vector
 
 17. Что будет выведено на экран, если откомпилировать и запустить программу:
 
-	`class ClassA
+	```class ClassA
 	{
 		public void showMe1()
 		{
@@ -704,7 +701,7 @@ c) Vector
 		{
 			System.out.println( "ClassB 2" );
 		}
-	}`
+	}```
 
 a) ClassA 1, с новой строки ClassA 2
 
@@ -716,12 +713,12 @@ d) ClassB 1, с новой строки ClassA 2
 
 18. Что неправильно в приведенном ниже коде ?
 
-	`Connection c = ...
+	```Connection c = ...
 	PreparedStatement p = c.prepareStatement("SELECT ...");
 	ResultSet r = p.execute();
 	if (r.next()) {
 		...
-	}`
+	}```
 
 a) Необходимо заменить if на while
 
