@@ -204,11 +204,11 @@ https://habrahabr.ru/company/luxoft/blog/157273/
    LinkedList:Если требуется много встовлять/удалять в середине списка или получать первое и последнее значение то LinkedList, дополнительные затраты на хранение связки между элементами;
    ArrayList: следует использовать при доступе по индексу так как получает элемент за константное время, нет дополнительных расходов на хранение связки между элементами;
 
-5. Какие коллекции вы знаете - ArrayList, LinkedList, HashSet, TreeSet, Vector, Stack, LinkedHashSet, Queue;
+5. Какие коллекции вы знаете - ArrayList, LinkedList, HashSet, TreeSet, Vector, Stack, LinkedHashSet;
 
 6. Какие интерфейсы коллекций вы знаете - List, Set, Collection, Dequeue, Queue, SortedSet;
 
-5. ArrayList, LinkedList, HashSet, HashMap это интерфейсы или классы - это интерфейсы классами для них являются List, Set, Map;
+5. ArrayList, LinkedList, HashSet, HashMap это интерфейсы или классы - это классы интерфейсами для них являются List, Set, Collection, Dequeue, Queue, SortedSet;
 
 6. Что такое HashMap - Это набор корзин ключь + значение. Ключь должен быть уникальным, нет сортировки;
 
