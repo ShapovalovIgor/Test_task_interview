@@ -375,6 +375,8 @@ https://jsehelper.blogspot.ru/
 http://javastudy.ru/interview/jee-hibernate-questions-answers/
 
 **Тест**
+Вакансия Java developer (Vaadin) (Промсвязьбанк)
+
 1. Что будет напечатано на консоли при попытке откомпилировать и выполнить следующий код:
     `float f = 36 / 8;
     System.out.println( f );`
@@ -785,3 +787,220 @@ a) c 1 +
 b) c 0
 
 c) задание числового номера недопустимо и вызовет ошибку времени компиляции
+
+Junior Java Developer (Тинькофф)
+
+Вопрос 1
+Question 1:
+
+1.  class Ex1{
+
+2.    public static void main(String[] args) {
+
+3.      int a[][] = new int[3][];
+
+4.       a[1] = new int[]{1,2,3};
+
+5.       a[2] = new int[]{4,5};
+
+6.    System.out.print(a[1][1]);
+
+7.    }
+
+8.  }
+
+
+
+A. Compilation fails due to line 3.
+
+B. Compilation fails due to line 4.
+
+C. An exception will be thrown in runtime.
+
+D. 2
+
+E. 3
+
+F. 5
+
+Ответ:D
+
+Вопрос 2
+1.  class Ex1{
+
+2.    int a=10;
+
+3.    public static void main(String[] args) {
+
+4.     new Ex1().print();
+
+5.    }
+
+6.  public void print(){
+
+7.    int a = 8;
+
+8.    System.out.print(a + " ");
+
+9.    }
+
+10.  }
+
+
+A. 10
+
+B. Compilation fails.
+
+C. 18
+
+D. Output is unpredicatable.
+
+E. 8
+
+Ответ:E
+
+Вопрос 3
+1.  class Ex1{
+
+2.    static int x = 10;
+
+3.    public static void main(String[] args) {
+
+4.     for(int x=0;x<5;x++){
+
+5.        }
+
+6.      System.out.print(x);
+
+7.    }
+
+8.  }
+
+
+A. 4
+
+B. 5
+
+C. Compilation fails.
+
+D. 10
+
+E. A runtime exception will be thrown.
+
+Ответ:D
+
+Вопрос 4
+1.  class Person{
+
+2.  Person(String s,int i ){
+
+3.      ++pid;
+
+4.      name=s;
+
+5.      age=i;
+
+6.      }
+
+7.    static int pid;
+
+8.    int age;
+
+9.    String name;
+
+10.      }
+
+11.  class Test{
+
+12.    public static void main(String args[]){
+
+13.    Person p1 = new Person("John" , 22);
+
+14.    Test te = new Test();
+
+15.    Person p2 = te.change(p1);
+
+16.    System.out.println(p2.pid +" "+p2.name+ " "+p2.age);
+
+17.    System.out.print(p1.pid +" "+p1.name+" "+ p1.age);
+
+18.  }
+
+19.  private Person change(Object o){
+
+20.  Person p2 = (Person)o;
+
+21.  p2.age = 25;
+
+22.  return p2;
+
+23.  }
+
+24.  }
+
+
+
+
+
+A:
+
+1 John 25
+
+1 John 25
+
+B:
+
+1 John 25
+
+1 John 22
+
+C:
+
+1 John 22
+
+1 John 22
+
+D: ClassCastException is thrown at runtime.
+
+E: Compilation fails.
+
+Ответ:B
+
+Вопрос 5
+1.  class Ex1{
+
+2.  public static void main(String args[]){
+
+3.  int x = 10;
+
+4.  int y = new Ex1().change(x);
+
+5.    System.out.print(x+y);
+
+6.  }
+
+7.  int change(int x){
+
+8.  x=12;
+
+9.  return x;
+
+10.  }
+
+11.  }
+
+
+
+
+
+A. 20
+
+B. 22
+
+C. Compilation fails.
+
+D. 24
+
+E. An exception is thrown at runtime.
+
+Ответ:B
