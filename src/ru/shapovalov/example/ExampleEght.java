@@ -1,0 +1,77 @@
+package ru.shapovalov.example;
+
+import java.lang.reflect.Field;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class ExampleEght implements Runnable {
+    //Тест многопоточности
+
+    int intSetConstant;
+
+    public static void main(String[] args) throws InterruptedException {
+        ExampleEght firstTest = new ExampleEght(11);
+        ExampleEght secondTest = new ExampleEght(12);
+        ExecutorService executorService = Executors.newFixedThreadPool(2);
+        executorService.submit(firstTest);
+        executorService.submit(secondTest);
+        Thread.sleep(7000);
+        System.exit(0);
+    }
+
+    public ExampleEght(int i) {
+        this.intSetConstant = i;
+    }
+
+    @Override
+    public void run() {
+        System.out.println("Start thread:" + intSetConstant);
+        TestRefactoring testRefactoring = new TestRefactoring();
+        try {
+            testRefactoring.print();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ExampleEght exampleSeven = new ExampleEght(intSetConstant);
+        try {
+            exampleSeven.setNewInt(testRefactoring, intSetConstant);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        try {
+            testRefactoring.print();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    static class TestRefactoring {
+        private static int testConstant = 123;
+
+        public TestRefactoring() {
+        }
+
+        private void print() throws InterruptedException {
+            int count = 0;
+            while (true){
+            System.out.println("Out thread:"+testConstant);
+            Thread.sleep(100);
+            count++;
+            if(count > 1){
+                break;
+            }
+            }
+        }
+    }
+
+    private void setNewInt(Object object, int newValue) throws IllegalAccessException {
+        Class clazz = object.getClass();
+        Field[] fields = clazz.getDeclaredFields();
+        for (Field field : fields) {
+            System.out.println(field.getName());
+            field.setAccessible(true);
+            field.setInt(object, newValue);
+            field.setAccessible(false);
+        }
+    }
+}
