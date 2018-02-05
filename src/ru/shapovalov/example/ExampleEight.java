@@ -12,7 +12,7 @@ public class ExampleEight implements Runnable {
     public static void main(String[] args) throws InterruptedException {
         ExampleEight firstTest = new ExampleEight(11);
         ExampleEight secondTest = new ExampleEight(12);
-        ExecutorService executorService = Executors.newFixedThreadPool(2);
+        ExecutorService executorService = Executors.newFixedThreadPool(2);//Если измень на 1 то потоки будут выполнятся последовательно
         executorService.submit(firstTest);
         executorService.submit(secondTest);
         Thread.sleep(7000);
@@ -46,7 +46,7 @@ public class ExampleEight implements Runnable {
     }
 
     static class TestRefactoring {
-        private static int testConstant = 123;
+        private int testConstant = 123;
 
         public TestRefactoring() {
         }
