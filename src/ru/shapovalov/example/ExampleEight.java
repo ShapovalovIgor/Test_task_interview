@@ -3,6 +3,7 @@ package ru.shapovalov.example;
 import java.lang.reflect.Field;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class ExampleEight implements Runnable {
     //Тест многопоточности + Рефлексии
@@ -15,7 +16,7 @@ public class ExampleEight implements Runnable {
         ExecutorService executorService = Executors.newFixedThreadPool(2);//Если измень на 1 то потоки будут выполнятся последовательно
         executorService.submit(firstTest);
         executorService.submit(secondTest);
-        Thread.sleep(7000);
+        TimeUnit.SECONDS.sleep(3);
         System.exit(0);
     }
 
@@ -55,7 +56,7 @@ public class ExampleEight implements Runnable {
             int count = 0;
             while (true){
             System.out.println("Out thread:"+testConstant);
-            Thread.sleep(100);
+                TimeUnit.MILLISECONDS.sleep(400);
             count++;
             if(count > 1){
                 break;
