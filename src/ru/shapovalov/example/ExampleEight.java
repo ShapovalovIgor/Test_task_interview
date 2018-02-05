@@ -4,14 +4,14 @@ import java.lang.reflect.Field;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class ExampleEght implements Runnable {
-    //Тест многопоточности
+public class ExampleEight implements Runnable {
+    //Тест многопоточности + Рефлексии
 
     int intSetConstant;
 
     public static void main(String[] args) throws InterruptedException {
-        ExampleEght firstTest = new ExampleEght(11);
-        ExampleEght secondTest = new ExampleEght(12);
+        ExampleEight firstTest = new ExampleEight(11);
+        ExampleEight secondTest = new ExampleEight(12);
         ExecutorService executorService = Executors.newFixedThreadPool(2);
         executorService.submit(firstTest);
         executorService.submit(secondTest);
@@ -19,7 +19,7 @@ public class ExampleEght implements Runnable {
         System.exit(0);
     }
 
-    public ExampleEght(int i) {
+    public ExampleEight(int i) {
         this.intSetConstant = i;
     }
 
@@ -32,7 +32,7 @@ public class ExampleEght implements Runnable {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        ExampleEght exampleSeven = new ExampleEght(intSetConstant);
+        ExampleEight exampleSeven = new ExampleEight(intSetConstant);
         try {
             exampleSeven.setNewInt(testRefactoring, intSetConstant);
         } catch (IllegalAccessException e) {

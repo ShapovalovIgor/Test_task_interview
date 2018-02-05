@@ -223,6 +223,8 @@ https://habrahabr.ru/company/luxoft/blog/157273/
 
 6. Что такое HashMap - Это набор корзин ключь + значение. Ключь должен быть уникальным, нет сортировки;
 
+6.1 Hashtable отличие от hashmap - Тем что Hashtable не может содержать Null как ключ или значение, Hashtable является потокозащищёной;
+
 7. Как избавится от кализий в HashMap - Если ключём у нас является кастомный объект то требуется переопределить методы equals() и hashCode() написав свою реализацию с использованием полей объекта пример в классе ExampleTwo;
 
 8. Что такое generic(Обобщение) - Generics позволяют абстрагировать множество типов; https://neerc.ifmo.ru/wiki/index.php?title=Generics https://www.youtube.com/watch?v=LF8ETKQQEXg
