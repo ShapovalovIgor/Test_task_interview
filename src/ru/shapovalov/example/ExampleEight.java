@@ -17,7 +17,6 @@ public class ExampleEight implements Runnable {
         executorService.submit(firstTest);
         executorService.submit(secondTest);
         TimeUnit.SECONDS.sleep(3);
-        executorService.shutdown();
     }
 
     public ExampleEight(int i) {
