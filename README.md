@@ -55,6 +55,8 @@ Prerequisites
 
 17. Какие вы знаете Exception - NullPointerException, Exception, SQLException, IOException, ThreadDeath, IndexOfBoundsException, ClassNotFoundException;
 
+<img src="../master/img/exception.jpg" width="450" height="350">
+
 18. Какие модификаторы доступа вы знаете - protected, public, package, private;
 
 19. Опишите уровни доступа - private: доступ в пределах класса, public: доступен всем, package: доступен в пределах пакета, protected: члены класса доступны внутри пакета и в классах-наследниках;
@@ -216,6 +218,9 @@ https://habrahabr.ru/company/luxoft/blog/157273/
 63. Что такое контракт между equals() и hashcode() - Если equals возвращает true, то hashCode должен вернуть одно и то же значение. Обратное не верно;
 
 **Collection**
+
+<img src="../master/img/collection.jpg" width="450" height="350">
+
 1. Что такое ArrayList - это список, реализованный на основе массива;
 
 1.1 Как SUN реализовала доступ в массиве по индексу к элементу например у нас есть элемент 7 - так как массив хранится у нас линейно в памяти и мы знаем размер блока памити для передоваемого типа данных можем расчитать по формуле (<адресс первого элемента массива> + (7*<Размер блока>));
