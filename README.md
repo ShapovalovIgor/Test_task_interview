@@ -55,7 +55,7 @@ Prerequisites
 
 17. Какие вы знаете Exception - NullPointerException, Exception, SQLException, IOException, ThreadDeath, IndexOfBoundsException, ClassNotFoundException;
 
-<img src="../master/img/exception.jpg" width="450" height="350">
+<img src="../master/img/exception.jpg" width="550" height="450">
 
 18. Какие модификаторы доступа вы знаете - protected, public, package, private;
 
@@ -219,7 +219,7 @@ https://habrahabr.ru/company/luxoft/blog/157273/
 
 **Collection**
 
-<img src="../master/img/collection.jpg" width="450" height="350">
+<img src="../master/img/collection.jpg" width="550" height="450">
 
 1. Что такое ArrayList - это список, реализованный на основе массива;
 
