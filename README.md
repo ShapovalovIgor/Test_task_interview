@@ -245,7 +245,7 @@ https://habrahabr.ru/company/luxoft/blog/157273/
 
 6. Какие интерфейсы коллекций вы знаете - List, Set, Collection, Dequeue, Queue, SortedSet, SortedMap;
 
-5. ArrayList, LinkedList, HashSet, HashMap, HashTable, LinkedHashMap, TreeMap это интерфейсы или классы - это классы интерфейсами для них являются List, Set, Collection, Dequeue, Queue, SortedSet;
+5. ArrayList, LinkedList, HashSet, HashMap, HashTable, LinkedHashMap, TreeMap это интерфейсы или классы - это классы интерфейсами для них являются List, Set, Collection, Dequeue, Map, SortedMap Queue, SortedSet;
 
 6. Что такое HashMap - Это набор корзин ключь + значение. Ключь должен быть уникальным, нет сортировки;
 
