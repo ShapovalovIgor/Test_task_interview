@@ -230,6 +230,14 @@ https://habrahabr.ru/company/luxoft/blog/157273/
                                                      Символьные: java.io.Reader, java.io.Writer;
 63. Что такое контракт между equals() и hashcode() - Если equals возвращает true, то hashCode должен вернуть одно и то же значение. Обратное не верно;
 
+64. Что такое try-with-resources - это автоматическое освобождение ресурса в конструкции try-catch если выбрашенно исключение.
+    Освобождает ресурс только если класс ресурса имплиментирует интерфейс Closeable;
+    https://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html
+
+65. Какие состояния потоков вы знаете - New(Создание), Runnable(Выполнение), Terminated(Завершение), Blocked(Блокирован), Timed_Waiting(Ожидаит заданное время), Waiting(Ожидает оканчания другова потока);
+
+66. Что отвечает за то в какой последовательности будут выполнятся поток - потоками управляет jvm;
+
 **Collection**
 
 <img src="../master/img/collection.jpg" width="550" height="450">
