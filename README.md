@@ -429,6 +429,145 @@ https://jsehelper.blogspot.ru/
 http://javastudy.ru/interview/jee-hibernate-questions-answers/
 
 **Тест**
+Вакансия Разработчик трекера (Яндекс)
+
+1. 	Какие из следующих стандартных контейнеров позволяют найти в них элемент за O(log(n)) по его значению?
+
+   	java.util.Vector<E>
+
+   	java.util.ArrayList<E>
+
+   	java.util.LinkedList<E>
+
+   	java.util.TreeSet<E>
+
+   	java.util.HashSet<E>
+
+   	сортированный java.util.Vector<E>
+
+   	сортированный java.util.ArrayList<E>
+
+   	сортированный java.util.LinkedList<E>
+
+Ответ: java.util.TreeSet<E>  бинарное дерево имеет сложность O(log(n))
+
+2. 	Напишите lock-free реализацию класса с методом BigInteger next(), который возвращает элементы последовательности Фибоначчи. Код должен корректно работать в многопоточной среде.
+
+Ответ:
+
+import java.math.BigInteger;
+import java.util.concurrent.atomic.AtomicReference;
+
+public class AtomicFibonacciSequence {
+
+    private static class FibonacciEntry {
+        BigInteger previous;
+        BigInteger current;
+
+        FibonacciEntry(){
+            previous = BigInteger.ZERO;
+            current = BigInteger.ONE;
+        }
+
+        FibonacciEntry(BigInteger previous, BigInteger current){
+            this.previous = previous;
+            this.current = current;
+        }
+
+        FibonacciEntry nextEntry() {
+            return new FibonacciEntry(current, current.add(previous));
+        }
+    }
+
+    private final AtomicReference<FibonacciEntry> entryHolder = new AtomicReference<>();
+
+    public AtomicFibonacciSequence() {
+        entryHolder.set(new FibonacciEntry());
+    }
+
+    public BigInteger next() {
+        for (;;) {
+            FibonacciEntry entry = entryHolder.get();
+            FibonacciEntry nextEntry = entry.nextEntry();
+            if (entryHolder.compareAndSet(entry, nextEntry)) {
+                return nextEntry.current;
+            }
+        }
+    }
+}
+
+3. Перечислите все проблемы, которые вы видите в данном коде:
+
+    ```
+      public abstract class Digest {
+
+          private Map<byte[], byte[]> cache = new HashMap<byte[], byte[]>();
+
+          public byte[] digest(byte[] input) {
+
+              byte[] result = cache.get(input);
+
+              if (result == null) {
+
+                  synchronized (cache) {
+
+                      result = cache.get(input);
+
+                      if (result == null) {
+
+                          result = doDigest(input);
+
+                          cache.put(input, result);
+
+                      }
+
+                  }
+
+              }
+
+              return result;
+
+          }
+
+          protected abstract byte[] doDigest(byte[] input);
+
+      }
+      ```
+
+  Ответ:
+  Двойная проверка на null не имеет смысла:
+      result = cache.get(input);
+                    if (result == null)
+  Да и вообще лучше проверку пепеписать в более правильный вид:
+  if(!cache.containsKey(input)
+
+  Массив byte[] как ключь не лучшая идея так как:
+  1) мы можем изменить массив в мапе и хэш останится старый так как объект у нас тот же но с новыми значениями. Однако если у нас массивы в ключе immutable то значение в массиве не поменяется.
+  2) так же для проверки ключа уже придется использовать не equals(), а Arrays.equals() так как, так как ключ в мапе и массив для сравнения скорее всего у нас будут разными объектами.
+  Как то не очень выглядит:
+  synchronized (cache) {
+  Для потокобезопасности в java есть  ConcurrentHashMap.
+
+  Можно вообще переписать в нормальный вид:
+
+  public abstract class Digest {
+   private Map<ImmutableByteArray, byte[]> cache = new ConcurrentHashMap<>();
+
+   public byte[] digest(byte[] input) {
+   ImmutableByteArray key = new ImmutableByteArray(input);
+   if(!cache.containsKey(key)) {
+   cache.put(key, result);
+   }
+   return cache.get(key);
+   }
+
+   protected abstract byte[] doDigest(byte[] input);
+   }
+
+4. 	Пусть N такое число, что 0xff = 0xc0 + N. Напишите представление числа N в десятичной системе счисления.
+
+Ответ: 63
+
 Вакансия Java developer (Vaadin) (Промсвязьбанк)
 
 1. Что будет напечатано на консоли при попытке откомпилировать и выполнить следующий код:
