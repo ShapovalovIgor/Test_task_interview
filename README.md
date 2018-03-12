@@ -309,6 +309,8 @@ https://habrahabr.ru/company/luxoft/blog/157273/
 
 18. Что возвращает compareTo() - значение >0 если первое значение больше второго, значение ==0 если значения равны, значение <0 первое значение меньше второго;
 
+19. Что появлось нового в колекциях в java 8 - stream
+
 **Hibernate**
 1. Что такое Hibernate — библиотека решаящая задачи ORM;
 
@@ -404,11 +406,15 @@ https://habrahabr.ru/company/luxoft/blog/157273/
 
 13. Statement и PreparedStatement - Statement: используют для простых запросов без параметров, а PreparedStatement используют для запросов с параметрами так как он иньекция защищёный;
 
+13.1 В PreparedStatement все строковые параметры автоматически преобразуются в строки с эскейп-последовательностями. В частности, нет никаких проблем со строками содержащими кавычки. А при использовании сложения строк и Statement вам об этом нужно заботиться самим или вы получите SQL injection.
+
 14. Что такое SQL Injection - это аттака на веб приложение при которой с помощью отправления SQL кода пытаются изменить или получить данные;
 
 15. Что такое транзакция - транзакция это последовательность операции к базе которые выполнятся либо все либо если в одной из операции будет ошибка то не одна операция не выпонится;
 
 16. Зачем нужны транзакции - для сохранения консистентности данных; 
+
+17. Оператор HAVING  - используется в сочетании с оператором GROUP BY, чтобы ограничить группы возвращаемых строк только тех, чье условие TRUE.
 
 **Алгоритмы и структуры данных**
 1. Что такое алгоритм - описание последовательности действий, строгое выполнение которых приводит к решению поставленной залачи за кончное число шагов.
@@ -436,6 +442,145 @@ https://jsehelper.blogspot.ru/
 http://javastudy.ru/interview/jee-hibernate-questions-answers/
 
 **Тест**
+Вакансия Разработчик трекера (Яндекс)
+
+1. 	Какие из следующих стандартных контейнеров позволяют найти в них элемент за O(log(n)) по его значению?
+
+   	java.util.Vector<E>
+
+   	java.util.ArrayList<E>
+
+   	java.util.LinkedList<E>
+
+   	java.util.TreeSet<E>
+
+   	java.util.HashSet<E>
+
+   	сортированный java.util.Vector<E>
+
+   	сортированный java.util.ArrayList<E>
+
+   	сортированный java.util.LinkedList<E>
+
+Ответ: java.util.TreeSet<E>  бинарное дерево имеет сложность O(log(n))
+
+2. 	Напишите lock-free реализацию класса с методом BigInteger next(), который возвращает элементы последовательности Фибоначчи. Код должен корректно работать в многопоточной среде.
+
+Ответ:
+
+import java.math.BigInteger;
+import java.util.concurrent.atomic.AtomicReference;
+
+public class AtomicFibonacciSequence {
+
+    private static class FibonacciEntry {
+        BigInteger previous;
+        BigInteger current;
+
+        FibonacciEntry(){
+            previous = BigInteger.ZERO;
+            current = BigInteger.ONE;
+        }
+
+        FibonacciEntry(BigInteger previous, BigInteger current){
+            this.previous = previous;
+            this.current = current;
+        }
+
+        FibonacciEntry nextEntry() {
+            return new FibonacciEntry(current, current.add(previous));
+        }
+    }
+
+    private final AtomicReference<FibonacciEntry> entryHolder = new AtomicReference<>();
+
+    public AtomicFibonacciSequence() {
+        entryHolder.set(new FibonacciEntry());
+    }
+
+    public BigInteger next() {
+        for (;;) {
+            FibonacciEntry entry = entryHolder.get();
+            FibonacciEntry nextEntry = entry.nextEntry();
+            if (entryHolder.compareAndSet(entry, nextEntry)) {
+                return nextEntry.current;
+            }
+        }
+    }
+}
+
+3. Перечислите все проблемы, которые вы видите в данном коде:
+
+    ```
+      public abstract class Digest {
+
+          private Map<byte[], byte[]> cache = new HashMap<byte[], byte[]>();
+
+          public byte[] digest(byte[] input) {
+
+              byte[] result = cache.get(input);
+
+              if (result == null) {
+
+                  synchronized (cache) {
+
+                      result = cache.get(input);
+
+                      if (result == null) {
+
+                          result = doDigest(input);
+
+                          cache.put(input, result);
+
+                      }
+
+                  }
+
+              }
+
+              return result;
+
+          }
+
+          protected abstract byte[] doDigest(byte[] input);
+
+      }
+      ```
+
+  Ответ:
+  Двойная проверка на null не имеет смысла:
+      result = cache.get(input);
+                    if (result == null)
+  Да и вообще лучше проверку пепеписать в более правильный вид:
+  if(!cache.containsKey(input)
+
+  Массив byte[] как ключь не лучшая идея так как:
+  1) мы можем изменить массив в мапе и хэш останится старый так как объект у нас тот же но с новыми значениями. Однако если у нас массивы в ключе immutable то значение в массиве не поменяется.
+  2) так же для проверки ключа уже придется использовать не equals(), а Arrays.equals() так как, так как ключ в мапе и массив для сравнения скорее всего у нас будут разными объектами.
+  Как то не очень выглядит:
+  synchronized (cache) {
+  Для потокобезопасности в java есть  ConcurrentHashMap.
+
+  Можно вообще переписать в нормальный вид:
+
+  public abstract class Digest {
+   private Map<ImmutableByteArray, byte[]> cache = new ConcurrentHashMap<>();
+
+   public byte[] digest(byte[] input) {
+   ImmutableByteArray key = new ImmutableByteArray(input);
+   if(!cache.containsKey(key)) {
+   cache.put(key, result);
+   }
+   return cache.get(key);
+   }
+
+   protected abstract byte[] doDigest(byte[] input);
+   }
+
+4. 	Пусть N такое число, что 0xff = 0xc0 + N. Напишите представление числа N в десятичной системе счисления.
+
+Ответ: 63
+
 Вакансия Java developer (Vaadin) (Промсвязьбанк)
 
 1. Что будет напечатано на консоли при попытке откомпилировать и выполнить следующий код:
