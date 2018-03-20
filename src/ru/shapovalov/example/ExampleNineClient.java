@@ -15,7 +15,7 @@ public class ExampleNineClient extends JFrame implements Runnable {
 
     public static void main(String[] args) {
         new Thread(new ExampleNineClient("Test")).start();
-        new Thread(new ExampleNineServer()).start();
+//        new Thread(new ExampleNineServer()).start();
 
     }
 
@@ -39,7 +39,7 @@ public class ExampleNineClient extends JFrame implements Runnable {
     @Override
     public void run() {
         try {
-            socket = new Socket(InetAddress.getByName("127.0.0.1"), 5678);
+            socket = new Socket(InetAddress.getByName("localhost"), 5678);
             while (true) {
                 objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
                 objectInputStream = new ObjectInputStream(socket.getInputStream());
