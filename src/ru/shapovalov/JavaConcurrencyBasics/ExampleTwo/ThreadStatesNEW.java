@@ -1,4 +1,4 @@
-package main.java.com.netcracker.java_concurrency_basics.TwoExample;
+package ru.shapovalov.JavaConcurrencyBasics.ExampleTwo;
 
 public class ThreadStatesNEW {
     public static void main(String[] args) throws Exception {

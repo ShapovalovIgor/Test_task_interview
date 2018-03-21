@@ -1,4 +1,4 @@
-package main.java.com.netcracker.java_concurrency_basics.TwoExample;
+package ru.shapovalov.JavaConcurrencyBasics.ExampleTwo;
 
 import java.util.concurrent.TimeUnit;
 
@@ -7,36 +7,25 @@ public class ThreadStatesBLOCKED {
 
 
     public static void main(String[] args) throws Exception {
-        Print print = new Print();
         Runnable r = new Runnable() {
             @Override
             public void run() {
-                for (int i = 0; i < 1000; i++) {
-                   print.setaDouble(i+.0);
+               synchronized (this){
 
-                }
+               }
             }
         };
 
         Thread t = new Thread(r);
-        Thread t2 = new Thread(r);
-        // Implement.
-        t2.start();
-        t.start();
-        TimeUnit.SECONDS.sleep(1);
 
-        System.out.println(t.getState());
-    }
-    public static class Print{
+       synchronized (t){
+           t.start();
 
-        private volatile Double aDouble;
+           while (t.getState() != Thread.State.BLOCKED){
 
-        public Double getaDouble() {
-            return aDouble;
-        }
+           }
+           System.out.println(t.getState());
+       }
 
-        public void setaDouble(Double aDouble) {
-            this.aDouble = aDouble;
-        }
     }
 }

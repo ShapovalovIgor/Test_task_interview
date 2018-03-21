@@ -1,4 +1,4 @@
-package main.java.com.netcracker.java_concurrency_basics.TwoExample;
+package ru.shapovalov.JavaConcurrencyBasics.ExampleTwo;
 
 public class ThreadStatesRUNNABLE {
     public static void main(String[] args) throws Exception {
@@ -6,12 +6,14 @@ public class ThreadStatesRUNNABLE {
             @Override
             public void run() {
                 // Implement.
+                while (true);
             }
         };
 
         Thread t = new Thread(r);
 
         // Implement.
+        t.setDaemon(true);
         t.start();
         System.out.println(t.getState());
     }

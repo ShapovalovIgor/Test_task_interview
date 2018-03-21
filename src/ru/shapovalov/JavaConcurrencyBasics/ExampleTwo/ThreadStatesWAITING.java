@@ -1,7 +1,5 @@
-package main.java.com.netcracker.java_concurrency_basics.TwoExample;
+package ru.shapovalov.JavaConcurrencyBasics.ExampleTwo;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class ThreadStatesWAITING {
@@ -21,9 +19,6 @@ public class ThreadStatesWAITING {
         };
 
         Thread t = new Thread(r);
-        Thread t2 = new Thread(r);
-        // Implement.
-        t2.start();
         t.start();
         TimeUnit.SECONDS.sleep(2);
 
