@@ -4,7 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 class Semaphore {
     private final int permits;
-    private int count = 0;
+    private int count;
 
     public Semaphore(int permits) {
         this.permits = permits;
@@ -15,23 +15,23 @@ class Semaphore {
     public void acquire() throws InterruptedException {
         // Implement.
         synchronized (lock) {
-            if (count > permits) {
+            while (count >= permits) {
                 System.out.println("wait");
-
                 lock.wait();
-            } else {
-                count++;
             }
+            count++;
         }
     }
 
     public void release() {
         // Implement.
         synchronized (lock) {
-            if (count >= permits) {
-                System.out.println("notify");
+            if (count > 0) {
                 count--;
-                lock.notifyAll();
+                if (count < permits) {
+                    System.out.println("notify");
+                    lock.notify();
+                }
             }
         }
     }
@@ -44,16 +44,15 @@ class Semaphore {
             @Override
             public void run() {
                 try {
-                    synchronized (semaphore) {
-                        semaphore.acquire();
-                        System.out.println(semaphore.count);
-                        Thread.sleep(2000);
+                    semaphore.acquire();
 
-                        semaphore.release();
+                    System.out.println("Permitted thread:" + Thread.currentThread());
 
-                    }
+                    Thread.sleep(2000);
+
+                    semaphore.release();
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    Thread.currentThread().interrupt();
                 }
             }
         };
@@ -61,16 +60,6 @@ class Semaphore {
             Thread thread = new Thread(runnable);
             thread.start();
         }
-        try {
-            semaphore.acquire();
 
-            System.out.println("Permitted.");
-
-            Thread.sleep(2000);
-
-            semaphore.release();
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-        }
     }
 }
