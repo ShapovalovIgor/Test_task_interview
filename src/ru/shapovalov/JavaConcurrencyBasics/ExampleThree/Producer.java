@@ -23,11 +23,18 @@ class Producer {
         // Implement.
         // Replace <id> with real id.
         for (int i = 0; i < msgNum; i++) {
+            if (Thread.currentThread().isInterrupted()) {
+                System.out.println("PROD" + id + " is stopped ");
+                break;
+            }
             String msg = "PROD" + id + "-" + i;
             try {
+                Thread.sleep(100);
                 queue.offer(msg);
                 System.out.println("Sent message: " + msg);
-                TimeUnit.SECONDS.sleep(2);
+            } catch (InterruptedException e) {
+                System.out.println("PROD" + id + " is stopped ");
+                break;
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -37,5 +44,9 @@ class Producer {
     void start() {
         // Implement.
         t.start();
+    }
+
+    void shutdown() {
+        t.interrupt();
     }
 }

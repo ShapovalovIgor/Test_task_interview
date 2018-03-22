@@ -1,7 +1,10 @@
 package ru.shapovalov.JavaConcurrencyBasics.ExampleThree;
 
+import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class Launcher {
     private static final int CONSUMERS_NUM = 2;
@@ -31,6 +34,20 @@ public class Launcher {
         for (Producer producer : producers) {
             producer.start();
         }
+
+        try {
+            TimeUnit.SECONDS.sleep(2);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        for (Producer producer : producers) {
+            producer.shutdown();
+        }
+        for (Consumer consumer : consumers) {
+            consumer.shutdown();
+        }
+
         // Start producers and consumers.
 
         // No shutdown is needed.

@@ -17,13 +17,16 @@ class Consumer {
 
     private void doJob() {
         // Implement.
-        while (true) {
-            try {
+        try {
+        while (!Thread.currentThread().isInterrupted()) {
+
                 String message = queue.take();
                 System.out.println("CONS" + id + " received message: " + message);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        }
+        } catch (InterruptedException e) {
+            System.out.println("CONS" + id + " is stopped");
+        }catch (Exception e) {
+            e.printStackTrace();
         }
         // Replace <msg> with real msg.
     }
@@ -31,5 +34,9 @@ class Consumer {
     void start() {
         // Implement
         t.start();
+    }
+
+    void shutdown(){
+        t.interrupt();
     }
 }
