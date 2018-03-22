@@ -1,13 +1,11 @@
-package ru.shapovalov.JavaConcurrencyBasics.ExampleThree;
+package ru.shapovalov.JavaConcurrencyBasics.ExampleSix;
 
-import java.sql.Time;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class Launcher {
-    private static final int CONSUMERS_NUM = 2;
+    private static final int CONSUMERS_NUM = 1;
     private static final int PRODUCER_NUM = 3;
     private static final int MSG_NUM = 100;
 
@@ -40,7 +38,6 @@ public class Launcher {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
         // Start producers and consumers.
 
         // No shutdown is needed.

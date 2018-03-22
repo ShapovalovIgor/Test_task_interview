@@ -1,8 +1,9 @@
-package ru.shapovalov.JavaConcurrencyBasics.ExampleThree;
+package ru.shapovalov.JavaConcurrencyBasics.ExampleSix;
 
 class Consumer {
     private final Queue<String> queue;
     private final int id;
+    private String tmp;
     private final Thread t = new Thread(new Runnable() {
         @Override
         public void run() {
@@ -17,13 +18,22 @@ class Consumer {
 
     private void doJob() {
         // Implement.
-        while (true) {
-            try {
+        try {
+            while (true) {
+
                 String message = queue.take();
                 System.out.println("CONS" + id + " received message: " + message);
-            } catch (Exception e) {
-                e.printStackTrace();
+                if (!message.equals(tmp)
+                        && tmp != null) {
+                    System.out.println("CONS" + id + " is stopped");
+                    break;
+                } else {
+                    tmp = message;
+                }
             }
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         // Replace <msg> with real msg.
     }
@@ -31,9 +41,5 @@ class Consumer {
     void start() {
         // Implement
         t.start();
-    }
-
-    void shutdown(){
-        t.interrupt();
     }
 }

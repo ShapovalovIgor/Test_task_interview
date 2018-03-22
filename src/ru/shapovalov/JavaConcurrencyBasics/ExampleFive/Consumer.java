@@ -1,4 +1,4 @@
-package ru.shapovalov.JavaConcurrencyBasics.ExampleThree;
+package ru.shapovalov.JavaConcurrencyBasics.ExampleFive;
 
 class Consumer {
     private final Queue<String> queue;
@@ -17,13 +17,16 @@ class Consumer {
 
     private void doJob() {
         // Implement.
-        while (true) {
-            try {
+        try {
+        while (!Thread.currentThread().isInterrupted()) {
+
                 String message = queue.take();
                 System.out.println("CONS" + id + " received message: " + message);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        }
+        } catch (InterruptedException e) {
+            System.out.println("CONS" + id + " is stopped");
+        }catch (Exception e) {
+            e.printStackTrace();
         }
         // Replace <msg> with real msg.
     }

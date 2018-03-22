@@ -1,6 +1,4 @@
-package ru.shapovalov.JavaConcurrencyBasics.ExampleThree;
-
-import java.util.concurrent.TimeUnit;
+package ru.shapovalov.JavaConcurrencyBasics.ExampleSix;
 
 class Producer {
     private final Queue<String> queue;
@@ -23,12 +21,23 @@ class Producer {
         // Implement.
         // Replace <id> with real id.
         for (int i = 0; i < msgNum; i++) {
+            if (Thread.currentThread().isInterrupted()) {
+                System.out.println("PROD" + id + " is stopped ");
+                break;
+            }
             String msg = "PROD" + id + "-" + i;
+            String tmp = msg;
+            if(i==1){
+                msg = new String();
+            }
             try {
                 Thread.sleep(100);
                 queue.offer(msg);
                 System.out.println("Sent message: " + msg);
-//                TimeUnit.SECONDS.sleep(2);
+                if(!msg.equals(tmp)){
+                    System.out.println("PROD" + id + " is stopped ");
+                    break;
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }

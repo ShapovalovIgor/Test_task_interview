@@ -1,8 +1,6 @@
-package ru.shapovalov.JavaConcurrencyBasics.ExampleThree;
+package ru.shapovalov.JavaConcurrencyBasics.ExampleFive;
 
-import java.sql.Time;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -39,6 +37,13 @@ public class Launcher {
             TimeUnit.SECONDS.sleep(2);
         } catch (InterruptedException e) {
             e.printStackTrace();
+        }
+
+        for (Producer producer : producers) {
+            producer.shutdown();
+        }
+        for (Consumer consumer : consumers) {
+            consumer.shutdown();
         }
 
         // Start producers and consumers.
