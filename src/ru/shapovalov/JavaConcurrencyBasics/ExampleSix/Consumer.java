@@ -3,7 +3,8 @@ package ru.shapovalov.JavaConcurrencyBasics.ExampleSix;
 class Consumer {
     private final Queue<String> queue;
     private final int id;
-    private String tmp;
+    private final int prodNum;
+    private int prodCounter;
     private final Thread t = new Thread(new Runnable() {
         @Override
         public void run() {
@@ -11,9 +12,10 @@ class Consumer {
         }
     });
 
-    Consumer(Queue<String> queue, int id) {
+    Consumer(Queue<String> queue, int id, int prodNum) {
         this.queue = queue;
         this.id = id;
+        this.prodNum = prodNum;
     }
 
     private void doJob() {
@@ -23,12 +25,12 @@ class Consumer {
 
                 String message = queue.take();
                 System.out.println("CONS" + id + " received message: " + message);
-                if (message != tmp
-                        && tmp != null) {
-                    System.out.println("CONS" + id + " is stopped");
-                    break;
-                } else {
-                    tmp = message;
+                //We know;
+                if (Producer.POISON_PILL == message) {
+                    if(prodNum <=prodCounter) {
+                        System.out.println("CONS" + id + " is stopped");
+                        break;
+                    }
                 }
             }
 
@@ -41,5 +43,9 @@ class Consumer {
     void start() {
         // Implement
         t.start();
+    }
+
+    void shutdown() {
+       //
     }
 }

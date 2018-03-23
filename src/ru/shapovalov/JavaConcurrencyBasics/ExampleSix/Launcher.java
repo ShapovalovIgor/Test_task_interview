@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Launcher {
     private static final int CONSUMERS_NUM = 1;
-    private static final int PRODUCER_NUM = 3;
+    private static final int PRODUCER_NUM = 5;
     private static final int MSG_NUM = 100;
 
     public static void main(String[] args) {
@@ -15,7 +15,7 @@ public class Launcher {
         List<Consumer> consumers = new ArrayList<>(CONSUMERS_NUM);
 
         for (int i = 0; i < CONSUMERS_NUM; i++) {
-            consumers.add(new Consumer(queue, i));
+            consumers.add(new Consumer(queue, i, PRODUCER_NUM));
         }
 
         List<Producer> producers = new ArrayList<>(PRODUCER_NUM);
@@ -38,6 +38,14 @@ public class Launcher {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        for (Producer producer : producers) {
+            producer.shutdown();
+        }
+        for (Consumer consumer : consumers) {
+            consumer.shutdown();
+        }
+
         // Start producers and consumers.
 
         // No shutdown is needed.
