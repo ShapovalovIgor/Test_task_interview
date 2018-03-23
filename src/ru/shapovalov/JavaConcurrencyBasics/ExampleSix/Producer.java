@@ -21,10 +21,6 @@ class Producer {
         // Implement.
         // Replace <id> with real id.
         for (int i = 0; i < msgNum; i++) {
-            if (Thread.currentThread().isInterrupted()) {
-                System.out.println("PROD" + id + " is stopped ");
-                break;
-            }
             String msg = "PROD" + id + "-" + i;
             String tmp = msg;
             if(i==1){

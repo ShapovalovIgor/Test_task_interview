@@ -23,7 +23,7 @@ class Consumer {
 
                 String message = queue.take();
                 System.out.println("CONS" + id + " received message: " + message);
-                if (!message.equals(tmp)
+                if (message != tmp
                         && tmp != null) {
                     System.out.println("CONS" + id + " is stopped");
                     break;
