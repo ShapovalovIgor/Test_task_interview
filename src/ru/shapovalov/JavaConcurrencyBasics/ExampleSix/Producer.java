@@ -1,10 +1,12 @@
 package ru.shapovalov.JavaConcurrencyBasics.ExampleSix;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 class Producer {
     private final Queue<String> queue;
     private final int id;
     private final int msgNum;
-    private boolean shutdown;
+    private AtomicBoolean shutdown = new AtomicBoolean();
     public static String POISON_PILL = new String("PoisonPill");
     private final Thread t = new Thread(new Runnable() {
         @Override
@@ -30,7 +32,7 @@ class Producer {
 
             try {
                 Thread.sleep(100);
-                if (shutdown) {
+                if (shutdown.get()) {
                     System.out.println("PROD" + id + " is stopped ");
                     queue.offer(POISON_PILL);
                     break;
@@ -49,6 +51,6 @@ class Producer {
     }
 
     void shutdown() {
-        shutdown = true;
+       shutdown.set(true);
     }
 }
