@@ -27,6 +27,7 @@ class Consumer {
                 System.out.println("CONS" + id + " received message: " + message);
                 //We know;
                 if (Producer.POISON_PILL == message) {
+                    prodCounter++;
                     if(prodNum <=prodCounter) {
                         System.out.println("CONS" + id + " is stopped");
                         break;
