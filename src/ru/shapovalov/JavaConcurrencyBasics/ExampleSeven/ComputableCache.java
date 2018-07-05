@@ -1,31 +1,31 @@
 package ru.shapovalov.JavaConcurrencyBasics.ExampleSeven;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class ComputableCache<K, V> {
     private final Map<K, V> cache = new ConcurrentHashMap<>();
-    private volatile List<K> keysList = new ArrayList<>();
+    private volatile Map<K, Object> keysMap = new ConcurrentHashMap<>();
 
-    public synchronized V compute(K key) {
-        keysList.add(key);
+    public V compute(K key) {
+        Objects.requireNonNull(key, "Key not null");
+        if (!keysMap.containsKey(key))
+            keysMap.put(key, new Object());
+
         V res = cache.get(key);
 
-        if (res == null
-                && !keysList.contains(key)) {
-            res = computeExpensive(key);
-
-            cache.putIfAbsent(key, res);
-
-            System.out.println(Thread.currentThread().getName() + ": miss");
-        } else {
-            System.out.println(Thread.currentThread().getName() + ": hit");
+        if (res != null) {
+            return res;
         }
-
-        return res;
+        V res0;
+        synchronized (keysMap.get(key)) {
+            res0 = computeExpensive(key);
+        }
+        res = cache.putIfAbsent(key, res0);
+        return res == null ? res0 : res;
     }
+
 
     private V computeExpensive(K key) {
         // Very expensive computation.
