@@ -1522,3 +1522,93 @@ E. An exception is thrown at runtime.
       и даёт редактировать поля: размер, стоимость, цвет, вид и краткое описание, а также кнопки для перемещения данных, сохранения и удаления.
        Web-приложение должно запускаться на jboss 7.x или на wildfly 10.x. Java8. Исходники и war файл скинуть на почту 
    
+   
+   **ООО "ФФИН Банк"**
+   
+   Необходимо перечислить базовые интерфейсы Java Collection API.
+   List, Set, Collection, Queue, SortedSet, SortedMap
+   Перечислите по одной реализации базовых интерфейсов.
+   ArrayList, HashSet, LinkedList, TreeSet, TreeMap
+   
+   
+   
+   Дан следующий java-код
+   
+   ⦁	A a = new A();
+   ⦁	A b = a;
+   ⦁	b = new A();
+   ⦁	b = new A();
+   ⦁	int i=0;
+   
+   Сколько экземпляров класса A будет создано?
+   3
+   Сколько  экземпляров  будет  доступно  для  сборщика  мусора  в  момент  выполнения строки 5?
+   2
+   
+   
+   
+   Необходимо реализовать на Java метод, принимающий на вход коллекцию строк и выбрасывающий из переданной коллекции все элементы, начинающиеся на «aaa».
+   Сигнатура метода должна иметь вид:
+   
+   public static void filterTripleA(Collection strings);
+   
+       public static void filterTripleA(Collection strings){
+           for(Object s : strings){
+               if(((String) s).startsWith("aaa"));
+               {
+                   strings.remove(s);
+               }
+           }
+       }
+   
+   
+   java 8:
+   public static void filterTripleA(Collection strings){
+      strings.removeIf(e -> ((String )e).startsWith("aaa"));
+   }
+   
+   
+   
+   
+   
+   
+   
+   Необходимо реализовать Java-метод, не использующий циклы, печатающий все неотрицательные чётные числа, небольшие указанного.
+   
+   Сигнатура метода должна иметь следующий вид:
+   
+   public static void printEvenNumbers(int number);
+   
+   
+   
+       public static void printEvenNumbers(int number){
+           IntStream.range(0, number+1)
+                   .filter(i -> (i%2)==0)
+                   .forEach(System.out::println);
+       }
+   
+   
+   Дана схема БД
+   
+    
+   
+   У клиента может не быть лицевых счетов. По лицевому счёту может не быть транзакций.
+   
+   Необходимо написать два SQL-запроса:
+   
+   1) SQL-запрос, возвращающий идентификаторы клиентов, имена которых начинаются на букву А.
+   
+   SELECT a.acc_number
+   FROM customer c
+               ,account a
+   WHERE c.name like "A%"
+   AND a.id = c.id
+   
+   2) SQL-запрос возвращающий имя клиента, описание его лицевого счёта и среднюю сумму транзакции по этому счёту.
+   
+   SELECT c.name, a.acc_number, avg(ft.transaction_date_amount)
+   FROM customer c
+               ,account a
+               ,fin_transaction ft
+   WHERE a.id = c.id
+   AND a.id = ft.id
